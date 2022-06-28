@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple dictionary app made using JavaScript and FreeDictionary API">
+    <meta name="keywords" content="JavaScript, API, Dictionary">
+    <meta name="author" content="Dappa David">
+    <title>Dictionary App</title>
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Fontawesome CDN -->
+    <script src="https://kit.fontawesome.com/ad0d56fe3e.js" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <h2>Dictionary App</h2>
+      <div class="search-bar">
+        <input type="text" name="" id="input" placeholder="Search for any word ...">
+        <button class="search-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      </div>
+      <div class="loader"></div>
+      <p class="error"></p>
+      <p class="empty-field">Input field is empty!</p>
+      <a href="index.html" class="retry-btn">Try another word<a>
+      <!-- <h5 class="retry-text">Try another word</h5> -->
+      </div>
+    </div>
+
+    <footer>
+      <a href="https://twitter.com/daveterry76" class="contact-link" target="_blank"><i class="fa-brands fa-twitter"></i><p class="contact-text">@daveterry76</p></a>
+      <a href="https://github.com/daveterry76" class="contact-link" target="_blank"><i class="fa-brands fa-github"></i><p class="contact-text">daveterry76</p></a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

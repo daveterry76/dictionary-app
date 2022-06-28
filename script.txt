@@ -1,0 +1,97 @@
+
+'use strict';
+
+const dictionaryContainer = document.querySelector('.container');
+const searchBar = document.querySelector('.search-bar');
+const errorMessage = document.querySelector('.error');
+const loadingSpinner = document.querySelector('.loader');
+const retryText = document.querySelector('.retry-text');
+
+const displayData = function (newData) {
+    const html = `
+                  <h3>${newData.word}</h3>
+                  <p>${newData.phonetic || ' '}</p>
+                  <p>Definition: ${newData.meanings[0].definitions[0].definition || 'none'}</p>
+                  <p>Synonyms:   ${newData.meanings[0].synonyms.join(', ') || 'none'}</p>
+                  <p>Antonyms:   ${newData.meanings[0].antonyms.join(', ') || 'none'}</p>
+                  <a href></a>
+                 `;
+
+    dictionaryContainer.insertAdjacentHTML('beforeend', html);
+}
+
+
+
+// Using fetch and then methods
+
+// function fetchDictionaryData(word) {
+//     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+//         .then(res => {
+//             console.log(res);
+
+//             if (!res.ok) {
+//                 throw new Error(alert(`Invalid word`));
+//             }
+//             return res.json();
+//         })
+//         .then(data => {
+//             const [newData] = data;
+//             console.log(newData);
+//             displayData(newData);
+//         })
+//         .catch(err => console.log(err.message));
+// }
+
+
+// Using async/await
+
+const inputData = document.getElementById('input');
+
+const fetchDictionaryData = async function (word) {
+
+    try {
+        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+        const data = await response.json();
+        const [newData] = data;
+        console.log(newData);
+        // const phonetic = newData.phonetic;
+        // const meaning = newData.meanings[0].definitions[0].definition;
+        // const synonyms = newData.meanings[0].synonyms.join(', ');
+        // const antonyms = newData.meanings[0].antonyms.join(', ');
+        // const audio = newData.phonetics[0].audio;
+        // console.log(audio);
+        displayData(newData);
+        retryText.style.display = "block";
+        loadingSpinner.style.display = "none";
+
+    }
+    catch {
+
+        errorMessage.textContent = `'${word}' does not exist. Try another word.`;
+        retryText.style.display = "block";
+        loadingSpinner.style.display = "none";
+
+    }
+
+}
+
+inputData.addEventListener('keypress', e => {
+    console.log(e);
+
+    if (e.code === "Enter") {
+        fetchDictionaryData(inputData.value);
+        searchBar.style.display = "none";
+        loadingSpinner.style.display = "block";
+    }
+})
+
+// I have to work on this feature later on to reset the dictionary without refreshing
+
+// retryText.addEventListener('click', function () {
+
+//     searchBar.style.display = "block";
+//     inputData.value = "";
+//     retryText.style.display = "none";
+//     displayData.<>
+
+// })
